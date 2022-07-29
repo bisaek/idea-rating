@@ -54,5 +54,5 @@ async function createIdea() {
         <label class="uppercase block" for="description">description</label>
         <textarea bind:value={idea.description} name="description" id="description" class="bg-slate-200 rounded-md w-full py-3 px-6 focus:bg-slate-300" rows="10"></textarea>
     </div>
-    <input type="submit" value="upload" class="btn btn-primary bg-slate-200 hover:bg-slate-300 text-lg px-6 py-3 w-min rounded-lg">
+    <input type="submit" value="upload" class="btn btn-primary uppercase bg-slate-200 hover:bg-slate-300 text-lg px-6 py-3 w-min rounded-lg">
 </form>
