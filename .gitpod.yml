@@ -3,6 +3,8 @@ image: gitpod/workspace-postgres
 
 tasks:
   - init: npm install
+    env:
+      DATABASE_URL: postgres://gitpod@localhost/ideas
 
 ports:
   - port: 5173
