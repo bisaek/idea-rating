@@ -10,6 +10,8 @@ let types = [
     "website",
     "mobile app",
     "desktop app",
+    "minecraft plugin",
+    "minecraft mod",
     "other"
 ];
 
