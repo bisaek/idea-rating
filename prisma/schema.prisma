@@ -16,5 +16,6 @@ model Idea{
     type String
     tags String[]
     image String
+    
 }
 
