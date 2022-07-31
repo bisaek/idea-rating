@@ -1,26 +1,27 @@
 //fd
-datasource db{
-    provider = "postgresql" 
-    url = env("DATABASE_URL")
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
-generator client{
-    provider = "prisma-client-js"
+generator client {
+    provider      = "prisma-client-js"
     binaryTargets = ["native"]
 }
 
-model Idea{
-    id String @id @default(cuid())
-    title String
+model Idea {
+    id          String        @id @default(cuid())
+    title       String
     description String
-    type String
-    tags String[]
-    image String
-    rates Idea_rating[] 
+    type        String
+    tags        String[]
+    image       String
+    Idea_rating Idea_rating[]
 }
 
-model Idea_rating{
-    id String @id @default(cuid())
-    Idea Idea @relation(fields: [IdeaId], references: [id])
+model Idea_rating {
+    id     String @id @default(cuid())
+    Idea   Idea   @relation(fields: [IdeaId], references: [id])
     IdeaId String
+    rate   Int
 }
