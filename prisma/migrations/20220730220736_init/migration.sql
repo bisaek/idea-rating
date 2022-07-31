@@ -6,7 +6,6 @@ CREATE TABLE "Idea" (
     "type" TEXT NOT NULL,
     "tags" TEXT[],
     "image" TEXT NOT NULL,
-    "link" TEXT NOT NULL,
 
     CONSTRAINT "Idea_pkey" PRIMARY KEY ("id")
 );

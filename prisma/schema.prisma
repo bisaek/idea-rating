@@ -16,6 +16,11 @@ model Idea{
     type String
     tags String[]
     image String
-    
+    rates Idea_rating[] 
 }
 
+model Idea_rating{
+    id String @id @default(cuid())
+    Idea Idea @relation(fields: [IdeaId], references: [id])
+    IdeaId String
+}

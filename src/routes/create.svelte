@@ -1,6 +1,7 @@
 <script lang="ts">
 import Error from "./__error.svelte";
 
+
 let types = [
     "game",
     "movie",
@@ -21,7 +22,6 @@ let idea = {
     type: "",
     tags: [],
     image: "",
-    link: "",
 }
 async function createIdea() {
     const res = await fetch('/idea/create', {
@@ -33,6 +33,9 @@ async function createIdea() {
     });
     const data = await res.json();
     console.log(data);
+
+    window.location.href = "idea/" +  data.id
+
 
 }
 </script>
