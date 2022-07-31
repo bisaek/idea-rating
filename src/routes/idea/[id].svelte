@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	const id = $page.params.id;
-	let Idea: Idea;
+	let Idea: Idea = null;
 
 	onMount(async () => {
 		const res = await fetch('get', {
@@ -14,14 +14,22 @@
 			body: JSON.stringify({ id })
 		});
 
-		const data = await res.json();
-		Idea = data.Idea[0];
+		Idea = await res.json();
+		// Idea = data.Idea[0];
 		console.log(Idea);
 	});
 </script>
 
-<div>
-	<h1 class="text-3xl">{Idea?.title} <span class="text-lg">{Idea?.type}</span></h1>
-	<p>{Idea?.tags}</p>
-	<p>{Idea?.description}</p>
-</div>
+{#if Idea}
+	<div>
+		<h1 class="text-3xl">{Idea?.title} <span class="text-lg">{Idea?.type}</span></h1>
+		<p>{Idea?.tags}</p>
+		<p>{Idea?.description}</p>
+		<ul>
+			{Idea?.rates[0].rate}
+			{#each Idea?.rates as rate}
+				<li>{rate.rate}</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
