@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	const id = $page.params.id;
-	let Idea: Idea = null;
+	let Idea: Idea | null = null;
 
 	onMount(async () => {
 		const res = await fetch('get', {
