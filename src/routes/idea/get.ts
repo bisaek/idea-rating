@@ -1,4 +1,5 @@
 import prisma from '$lib/prisma';
+import type { Idea_rating } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -15,10 +16,12 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	});
 
-	let average_rate: number = 0;
-
 	return {
 		status: 200,
-		body: { ...Idea, rates: idea_rating, average_rate }
+		body: { ...Idea, rates: idea_rating, average_rate: average_rate(idea_rating) }
 	};
 };
+
+function average_rate(ratings: Idea_rating[]) {
+	return parseInt((ratings.reduce((acc, cur) => acc + cur.rate, 0) / ratings.length).toFixed());
+}

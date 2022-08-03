@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import Index from '../index.svelte';
+
+	import Star from '$lib/star.svelte';
 
 	const id = $page.params.id;
 	let Idea: Idea | null = null;
@@ -26,9 +27,6 @@
 
 		Idea = await res.json();
 		// Idea = data.Idea[0];
-
-		// average_rate color
-		for (var i = 0; i < 5; i++) {}
 	});
 
 	async function rate(index: number) {
@@ -53,8 +51,19 @@
 </script>
 
 {#if Idea}
-	<div>
-		<h1 class="text-3xl">{Idea?.title} <span class="text-lg">{Idea?.type}</span></h1>
+	<div class="flex-col flex gap-4">
+		<div class="flex">
+			<h1 class="text-3xl">
+				{Idea?.title}
+			</h1>
+			{#each [...Array(Idea?.average_rate).keys()] as star}
+				<Star color="yellow" />
+			{/each}
+			{#each [...Array(5 - Idea?.average_rate).keys()] as star}
+				<Star color="black" />
+			{/each}
+			<span class="text-lg">{Idea?.type}</span>
+		</div>
 		<p>{Idea?.tags}</p>
 		<p>{Idea?.description}</p>
 
@@ -62,35 +71,12 @@
 			{#each stars as star}
 				<span on:click={() => rate(star.index)}>
 					{#if star.on}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							fill="yellow"
-							viewBox="0 0 24 24"
-							><path
-								d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"
-							/></svg
-						>
+						<Star color="yellow" />
 					{:else}
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							fill="black"
-							viewBox="0 0 24 24"
-							><path
-								d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"
-							/></svg
-						>
+						<Star color="black" />
 					{/if}
 				</span>
 			{/each}
 		</div>
-		<ul>
-			{#each Idea?.rates as rate}
-				<li>{rate.rate}</li>
-			{/each}
-		</ul>
 	</div>
 {/if}
