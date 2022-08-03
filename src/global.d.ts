@@ -6,6 +6,7 @@ type Idea = {
 	tags: String[];
 	image: String;
 	rates: Idea_rating[];
+	average_rate: number;
 };
 type Idea_rating = {
 	id: String;

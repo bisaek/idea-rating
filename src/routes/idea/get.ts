@@ -14,9 +14,11 @@ export const POST: RequestHandler = async ({ request }) => {
 			IdeaId: body.id as string
 		}
 	});
-	console.log(Idea);
+
+	let average_rate: number = 0;
+
 	return {
 		status: 200,
-		body: { ...Idea, rates: idea_rating }
+		body: { ...Idea, rates: idea_rating, average_rate }
 	};
 };
