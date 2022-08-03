@@ -5,6 +5,7 @@
 
 	const id = $page.params.id;
 	let Idea: Idea | null = null;
+	let av;
 
 	let stars: Array<{ index: number; on: Boolean }> = [
 		{ index: 0, on: false },
@@ -25,6 +26,9 @@
 
 		Idea = await res.json();
 		// Idea = data.Idea[0];
+
+		// average_rate color
+		for (var i = 0; i < 5; i++) {}
 	});
 
 	async function rate(index: number) {
