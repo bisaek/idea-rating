@@ -26,10 +26,16 @@
 		});
 
 		Idea = await res.json();
-		// Idea = data.Idea[0];
+		if (!Idea) return;
+
+		if (Idea?.average_rate == null) {
+			Idea.average_rate = 0;
+		}
 	});
 
 	async function rate(index: number) {
+		if (!Idea) return;
+
 		const res = await fetch('rate', {
 			method: 'POST',
 			headers: {
@@ -45,7 +51,7 @@
 		});
 		stars = stars;
 
-		Idea?.rates.unshift({ id: data.id, rate: index + 1, Idea, IdeaId: id });
+		Idea.rates.unshift({ id: data.id, rate: index + 1, Idea, IdeaId: id });
 		Idea.rates = Idea?.rates;
 	}
 </script>
